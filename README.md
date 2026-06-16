@@ -225,13 +225,6 @@ banking-transaction-prediction/
 
 ---
 
-## 📚 Documentation
-
-- [Business Understanding](docs/business_understanding.md)
-- [Technical Architecture](docs/technical_architecture.md)
-- [Interview Preparation — 50 Q&A](docs/interview_prep.md)
-
----
 
 ## 👨‍💻 About This Project
 
