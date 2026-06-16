@@ -1,0 +1,75 @@
+
+# ============================================================
+# Banking Transaction Prediction - Configuration
+# Production-grade centralized configuration
+# ============================================================
+
+project:
+  name: "Customer Transaction Prediction for Banking"
+  version: "1.0.0"
+  author: "Senior Data Scientist"
+  description: "MNC-level production-ready banking analytics solution"
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  models: "models"
+  reports: "reports"
+  logs: "logs"
+  artifacts: "models/artifacts"
+
+data:
+  target_column: "target"
+  id_column: "ID_code"
+  n_features: 200
+  test_size: 0.2
+  random_state: 42
+
+  # Data quality thresholds
+  missing_threshold: 0.05
+  outlier_threshold: 3.0
+  correlation_threshold: 0.95
+  variance_threshold: 0.01
+
+features:
+  # Statistical aggregations
+  aggregation_windows: [5, 10, 20, 50]
+
+  # Polynomial features
+  poly_degree: 2
+  poly_interaction_only: false
+
+  # Feature scaling
+  scaler_type: "robust"  # options: standard, robust, minmax
+
+modeling:
+  cv_folds: 5
+  n_trials_optuna: 100
+  early_stopping_rounds: 50
+
+  # Class imbalance
+  handle_imbalance: true
+  sampling_strategy: "smote"  # smote, adasyn, random_over
+
+  # Threshold optimization
+  optimize_threshold: true
+  threshold_metric: "f1"  # f1, precision, recall, roc_auc
+
+# Business metrics
+business:
+  cost_fp: 50  # Cost of false positive (marketing cost wasted)
+  cost_fn: 500  # Cost of false negative (missed transaction opportunity)
+  avg_transaction_value: 2500
+  marketing_cost_per_customer: 50
+
+# Model registry
+mlflow:
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "banking_transaction_prediction"
+  registered_model_name: "transaction_predictor"
+
+# Monitoring
+monitoring:
+  data_drift_threshold: 0.1
+  performance_degradation_threshold: 0.05
+  retraining_trigger: "weekly"
